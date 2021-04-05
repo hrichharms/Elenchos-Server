@@ -32,7 +32,7 @@ def get_macros():
 
 @app.route("/macros/new", methods=["POST"])
 def new_macro():
-    macro = Macro(name=request.json["name"], cmd=request.json["cmd"])
+    macro = Macro(name=request.json["name"], cmd=request.json["cmd"], priority=1, selected=False)
     db.session.add(macro)
     db.session.commit()
     return macro.to_json()
