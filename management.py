@@ -50,7 +50,7 @@ quit:\t\t\t\tExit Elenchos Management System\n""")
             if macros:
                 print("name, id, priority, selected, cmd")
                 for macro in macros:
-                    print(f"{macro['name']},{macro['cmd']},{macro['priority']},{macro['selected']},{macro['cmd']}")
+                    print(f"{macro['name']},{macro['id']},{macro['cmd']},{macro['priority']},{macro['selected']},{macro['cmd']}")
             else:
                 print("No macros currently exist in database.")
         elif cmd == "new":
