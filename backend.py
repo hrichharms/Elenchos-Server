@@ -37,6 +37,7 @@ def new_macro():
     db.session.commit()
     return macro.to_json()
 
+
 @app.route("/macros/delete/<id>", methods=["POST"])
 def delete_macro(id):
     macro = Macro.query.get_or_404(id)
