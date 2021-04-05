@@ -19,14 +19,8 @@ class Macro(db.Model): # commands that can be selected
     priority = db.Column(db.Integer)
     selected = db.Column(db.Boolean)
 
-    def __init__(self, name, cmd):
-        self.name = name
-        self.cmd = cmd
-        self.priority = 0
-        self.selected = False
-
     def to_json(self):
-        return dict(name=self.name, cmd=self.cmd, priority=self.priority, selected=self.selected)
+        return dict(id=self.id, name=self.name, cmd=self.cmd, priority=self.priority, selected=self.selected)
 
 
 # API CODE
@@ -38,7 +32,7 @@ def get_macros():
 
 @app.route("/macros/new", methods=["POST"])
 def new_macro():
-    macro = Macro(request.json["name"], request.json["cmd"])
+    macro = Macro(name=request.json["name"], cmd=request.json["cmd"])
     db.session.add(macro)
     db.session.commit()
     return macro.to_json()
