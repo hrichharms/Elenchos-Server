@@ -33,7 +33,7 @@ class Macro(db.Model): # commands that can be selected
 @app.route("/macros")
 def get_macros():
     macros = Macro.query.all()
-    return [macro.to_json() for macro in macros]
+    return {"macros": [macro.to_json() for macro in macros]}
 
 
 @app.route("/macros/new", methods=["POST"])
