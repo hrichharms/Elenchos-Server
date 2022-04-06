@@ -45,7 +45,7 @@ def delete_macro(id):
     db.session.commit()
 
 
-@app.route("/macros/<id>")
+@app.route("/macros/set/<id>", methods=["POST"])
 def set_macro_attribute(id):
     macro = Macro.query.get_or_404(id)
     if request.json["attribute"] != "id":
@@ -55,9 +55,10 @@ def set_macro_attribute(id):
         return {"success": 0}
 
 
-@app.route("/macros/run", methods=["POST"])
+@app.route("/macros/run")
 def run_macros():
     macros = [macro for macro in Macro.query.all() if macro.selected]
     # sort and execute macros in ascending order of priority
-    for macro in sorted(macros, lambda m : m.priority):
+    for macro in sorted(macros, key=lambda m : m.priority):
         os.system(macro.cmd)
+    return {"success": 1}
